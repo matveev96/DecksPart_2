@@ -17,19 +17,25 @@ export const DeckItem = ({ deck }: DeckProps) => {
   const [isLoading, setIsLoading] = useState(false)
 
   const handleDeleteButtonClick = () => {
-    (async () => {
-      setIsLoading(true)
-      await dispatch(deleteDeckTC(deck.id))
-      setIsLoading(false)
-    })()
+    // (async () => {
+    //   setIsLoading(true)
+    //   await dispatch(deleteDeckTC(deck.id))
+    //   setIsLoading(false)
+    // })()
+    setIsLoading(true)
+    dispatch(deleteDeckTC(deck.id))
+      .finally(() => setIsLoading(false))
   }
 
   const handleEditButtonClick = () => {
-    (async () => {
-      setIsLoading(true)
-      await dispatch(updateDeckTC({ id: deck.id, name: `${deck.name} updated` }))
-      setIsLoading(false)
-    })()
+    // (async () => {
+    //   setIsLoading(true)
+    //   await dispatch(updateDeckTC({ id: deck.id, name: `${deck.name} updated` }))
+    //   setIsLoading(false)
+    // })()
+    setIsLoading(true)
+    dispatch(updateDeckTC({ id: deck.id, name: `${deck.name} updated` }))
+      .finally(() => setIsLoading(false))
   }
 
   return (
