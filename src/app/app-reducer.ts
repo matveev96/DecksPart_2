@@ -11,7 +11,10 @@ type AppStateType = typeof initialState
 export const appReducer = (state: AppStateType = initialState, action: ActionsType): AppStateType => {
   switch (action.type) {
     case "APP/LOADING-DECKS": {
-      return {...state, status: action.payload}
+      return {...state, status: action.status}
+    }
+    case "APP/SET-ERROR": {
+      return {...state, error: action.error}
     }
     default:
       return state
@@ -20,11 +23,16 @@ export const appReducer = (state: AppStateType = initialState, action: ActionsTy
 
 export const setLoadingDeckAC = (status: RequestStatusType) => ({
   type: 'APP/LOADING-DECKS' as const,
-  payload: status,
+  status,
 })
 
+export const setErrorAC = (error: string | null) => ({
+  type: 'APP/SET-ERROR' as const,
+  error,
+})
 
 
 type ActionsType =
   | ReturnType<typeof setLoadingDeckAC>
+  | ReturnType<typeof setErrorAC>
 
